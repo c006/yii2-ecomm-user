@@ -1,0 +1,42 @@
+{
+  "name": "c006/yii2-ecomm-user",
+  "description": "User module",
+  "type": "yii2-extension",
+  "keywords": [
+    "yii2",
+    "extension",
+    "user"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Jon Chambers",
+      "email": "jchambers.dev@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "c006\\user\\": ""
+    }
+  },
+  "require": {
+    "c006/yii2-email-templates": "dev-master",
+    "c006/yii2-alerts": "dev-master"
+  },
+  "extra": {
+    "asset-installer-paths": {
+      "https://github.com/c006/yii2-email-templates": "c006/yii2-email-templates",
+      "https://github.com/c006/yii2-alerts": "c006/yii2-alerts"
+    }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/c006/yii2-email-templates"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/c006/yii2-alerts"
+    }
+  ]
+}
