@@ -1,6 +1,7 @@
 <?php
 namespace c006\user\models\form;
 
+use c006\user\models\User;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\base\Model;
@@ -14,7 +15,7 @@ class ResetPassword extends Model
     public $password;
 
     /**
-     * @var /common/models/User
+     * @var /c006/user/models/User
      */
     private $_user;
 
@@ -23,7 +24,7 @@ class ResetPassword extends Model
      * Creates a form model given a token.
      *
      * @param  string $token
-     * @param  array $config name-value pairs that will be used to initialize the object properties
+     * @param  array  $config name-value pairs that will be used to initialize the object properties
      *
      * @throws \yii\base\InvalidParamException if token is empty or not valid
      */
@@ -57,7 +58,7 @@ class ResetPassword extends Model
      */
     public function resetPassword()
     {
-        $user = $this->_user;
+        $user           = $this->_user;
         $user->password = $this->password;
         $user->removePasswordResetToken();
 

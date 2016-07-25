@@ -9,7 +9,7 @@ use yii\helpers\Html;
 /* @var $model c006\user\models\form\Transactions */
 /** @var $items Array */
 
-$this->title = Yii::t('app', 'User Transactions');
+$this->title                   = Yii::t('app', 'User Transactions');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'My Account'), 'url' => '/account'];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -83,7 +83,7 @@ $tally = 0;
                 <?php foreach ($items as $item) : ?>
                     <?php
                     $tally += $item['amount'];
-                    $class = '';
+                    $class       = '';
                     $tally_class = ($tally < 0) ? 'bg-red' : 'bg-green';
                     ?>
                     <div class="table-row <?= $item['transactionType']['css'] ?>">

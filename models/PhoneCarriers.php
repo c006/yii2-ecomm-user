@@ -8,9 +8,9 @@ use Yii;
  * This is the model class for table "phone_carriers".
  *
  * @property integer $id
- * @property string $name
+ * @property string  $name
  *
- * @property User[] $users
+ * @property User[]  $users
  */
 class PhoneCarriers extends \yii\db\ActiveRecord
 {
@@ -39,7 +39,7 @@ class PhoneCarriers extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
+            'id'   => Yii::t('app', 'ID'),
             'name' => Yii::t('app', 'Name'),
         ];
     }

@@ -4,21 +4,21 @@ use c006\user\assets\AppHelper;
 use yii\helpers\Html;
 
 $tally = 0;
-$user = AppHelper::getUserBy('id', Yii::$app->user->id);
+$user  = AppHelper::getUserBy('id', Yii::$app->user->id);
 ?>
 
 <div class="item-container-heavy">
 
     <div class="item-container no-border">
-        <?= Html::a(Yii::t('app', 'Friends'), '/account/friends', ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Friends'), '/account/friends', ['class' => 'btn btn-secondary']) ?>
         <?= Html::a(Yii::t('app', 'Add Funds'), '/account/funds/add', ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('app', 'Send Funds'), '/account/funds', ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('app', 'Lending'), '/account/funds/loans', ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'All Notifications ( ' . sizeof(AppHelper::getNotification(-1, TRUE)) . ' )'), '/account/notifications', ['class' => 'btn btn-success']) ?>
-        <?= Html::a(Yii::t('app', 'All Transactions'), '/account/transactions', ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'All Notifications ( ' . sizeof(AppHelper::getNotification(-1, TRUE)) . ' )'), '/account/notifications', ['class' => 'btn btn-secondary']) ?>
+        <?= Html::a(Yii::t('app', 'All Transactions'), '/account/transactions', ['class' => 'btn btn-secondary']) ?>
         <!--        --><? //= Html::a(Yii::t('app', 'Billing'), '/account/billing', ['class' => 'btn btn-primary']) ?>
         <!--        --><? //= Html::a(Yii::t('app', 'Shipping'), '/account/shipping', ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Preferences'), '/account/settings', ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Preferences'), '/account/settings', ['class' => 'btn btn-secondary']) ?>
     </div>
 
     <div class="table">
@@ -69,7 +69,7 @@ $user = AppHelper::getUserBy('id', Yii::$app->user->id);
                             <?php foreach ($items as $item) : ?>
                                 <?php
                                 $tally += $item['amount'];
-                                $class = '';
+                                $class       = '';
                                 $tally_class = ($tally < 0) ? 'bg-red' : 'bg-green';
                                 ?>
                                 <div class="table-row <?= $item['transactionType']['css'] ?>">
@@ -77,7 +77,8 @@ $user = AppHelper::getUserBy('id', Yii::$app->user->id);
                                     <div class="table-cell"><?= $item['ledger'] ?></div>
                                     <div class="table-cell"><?= $item['transactionType']['name'] ?></div>
                                     <div class="table-cell"><?= Yii::$app->params['currency_sign'] ?><?= number_format($item['amount'] + 0.00, 2) ?></div>
-<!--                                    <div class="table-cell">--><?//= Yii::$app->params['currency_sign'] ?><!----><?//= number_format($tally + 0.00, 2) ?><!--</div>-->
+                                    <!--                                    <div class="table-cell">--><? //= Yii::$app->params['currency_sign'] ?><!---->
+                                    <? //= number_format($tally + 0.00, 2) ?><!--</div>-->
                                 </div>
                             <?php endforeach ?>
                             <div class="table-row hide">

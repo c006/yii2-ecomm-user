@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $searchModel c006\user\models\search\UserBilling */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Billing Addresses');
+$this->title                   = Yii::t('app', 'Billing Addresses');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'My Account'), 'url' => '/account'];
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Settings'), 'url' => '/account/settings'];
 $this->params['breadcrumbs'][] = $this->title;
@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create User Billing'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create User Billing'), ['create'], ['class' => 'btn btn-secondary']) ?>
 
     </p>
 
@@ -28,10 +28,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns'      => [
             ['class' => 'yii\grid\SerialColumn'],
 
-//                    'id',
-//            'network_id',
-//            'store_id',
-//            'user_id',
+            //                    'id',
+            //            'network_id',
+            //            'store_id',
+            //            'user_id',
             'name',
             'exp_month',
             'exp_year',
@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class'    => 'yii\grid\ActionColumn',
-                'template' => '<div class="nowrap">{update} {delete}</div>'
+                'template' => '<div class="nowrap">{update} {delete}</div>',
             ],
         ],
     ]); ?>

@@ -38,7 +38,7 @@ class UserShippingController extends Controller
         parent::init();
         AssetGridView::register($this->getView());
 
-        $searchModel = new UserShippingSearch();
+        $searchModel  = new UserShippingSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -71,11 +71,11 @@ class UserShippingController extends Controller
         $model = new UserShipping();
 
         if (isset($_POST['UserShipping'])) {
-            $post = $_POST['UserShipping'];
+            $post              = $_POST['UserShipping'];
             $model->attributes = $post;
             $model->network_id = AppHelper::getNetwork();
-            $model->store_id = AppHelper::getStore();
-            $model->user_id = Yii::$app->user->id;
+            $model->store_id   = AppHelper::getStore();
+            $model->user_id    = Yii::$app->user->id;
 
             if ($model->validate() && $model->save()) {
                 Alerts::setAlertType(Alerts::ALERT_SUCCESS);
@@ -89,8 +89,8 @@ class UserShippingController extends Controller
         }
 
         $model->network_id = 0;
-        $model->store_id = 0;
-        $model->user_id = 0;
+        $model->store_id   = 0;
+        $model->user_id    = 0;
 
         return $this->render('create', [
             'model' => $model,
@@ -110,11 +110,11 @@ class UserShippingController extends Controller
         $model = $this->findModel($id);
 
         if (isset($_POST['UserShipping'])) {
-            $post = $_POST['UserShipping'];
+            $post              = $_POST['UserShipping'];
             $model->attributes = $post;
             $model->network_id = AppHelper::getNetwork();
-            $model->store_id = AppHelper::getStore();
-            $model->user_id = Yii::$app->user->id;
+            $model->store_id   = AppHelper::getStore();
+            $model->user_id    = Yii::$app->user->id;
 
             if ($model->validate() && $model->save()) {
                 Alerts::setAlertType(Alerts::ALERT_SUCCESS);
@@ -128,8 +128,8 @@ class UserShippingController extends Controller
         }
 
         $model->network_id = 0;
-        $model->store_id = 0;
-        $model->user_id = 0;
+        $model->store_id   = 0;
+        $model->user_id    = 0;
 
         return $this->render('update', [
             'model' => $model,

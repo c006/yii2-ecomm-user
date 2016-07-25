@@ -13,19 +13,20 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-signup">
     <h1 class="title-large"><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out the following fields:</p>
+    <div class="item-container margin-top-20">
 
-    <div class="">
         <?php $form = ActiveForm::begin(['id' => 'form-signup', 'validateOnType' => TRUE]); ?>
         <?= $form->field($model, 'first_name') ?>
         <?= $form->field($model, 'last_name') ?>
         <div class="table">
-            <div class="table-cell width-50 padding-right-10"><?= $form->field($model, 'email') ?></div>
-            <div class="table-cell width-50"><?= $form->field($model, 'email_match') ?></div>
+            <div
+                class="table-cell width-50 padding-right-10"><?= $form->field($model, 'email')->textInput(['autocomplete'=>'off']) ?></div>
+            <div class="table-cell width-50"><?= $form->field($model, 'email_match')->textInput(['autocomplete'=>'off']) ?></div>
         </div>
         <div class="table">
-            <div class="table-cell width-50 padding-right-10"><?= $form->field($model, 'password')->passwordInput() ?></div>
-            <div class="table-cell width-50"><?= $form->field($model, 'password_match')->passwordInput() ?></div>
+            <div
+                class="table-cell width-50 padding-right-10"><?= $form->field($model, 'password')->passwordInput(['autocomplete'=>'off']) ?></div>
+            <div class="table-cell width-50"><?= $form->field($model, 'password_match')->passwordInput(['autocomplete'=>'off']) ?></div>
         </div>
         <?= $form->field($model, 'phone') ?>
         <div class="form-group">
@@ -53,11 +54,5 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 }, 500);
             });
-
-
-        <?php if (class_exists('common\\assets\\AssetExtrasJs')) : ?>
-        var $extras = new Extras();
-        $extras.init();
-        <?php endif ?>
     });
 </script>

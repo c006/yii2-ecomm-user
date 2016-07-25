@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model c006\user\models\UserRolesLink */
 
-$this->title = $model->user_roles_link_id;
+$this->title                   = $model->user_roles_link_id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'User Roles Links'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

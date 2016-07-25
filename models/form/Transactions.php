@@ -17,7 +17,6 @@ class Transactions extends Model
     public $date_to;
 
 
-
     /**
      * @inheritdoc
      */

@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "user_roles".
  *
  * @property integer $user_roles_id
- * @property string $name
+ * @property string  $name
  * @property integer $level
  */
 class UserRoles extends \yii\db\ActiveRecord
@@ -29,7 +29,7 @@ class UserRoles extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['user_roles_id', 'level'], 'integer'],
-            [['name'], 'string', 'max' => 45]
+            [['name'], 'string', 'max' => 45],
         ];
     }
 

@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $searchModel c006\user\models\search\UserShipping */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Shipping Addresses');
+$this->title                   = Yii::t('app', 'Shipping Addresses');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'My Account'), 'url' => '/account'];
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Settings'), 'url' => '/account/settings'];
 $this->params['breadcrumbs'][] = $this->title;
@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Add Shipping Address'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Add Shipping Address'), ['create'], ['class' => 'btn btn-secondary']) ?>
     </p>
 
     <?= GridView::widget([
@@ -26,8 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel'  => $searchModel,
         'columns'      => [
             ['class' => 'yii\grid\SerialColumn'],
-//
-//            'id',
+            //
+            //            'id',
             'name',
             'address',
             'address_apt',
@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class'    => 'yii\grid\ActionColumn',
-                'template' => '<div class="nowrap">{edit} {delete}</div>'
+                'template' => '<div class="nowrap">{edit} {delete}</div>',
             ],
         ],
     ]); ?>

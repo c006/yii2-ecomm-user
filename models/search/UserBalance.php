@@ -2,15 +2,15 @@
 
 namespace c006\user\models\search;
 
-use c006\user\models\PhoneCarriers as PhoneCarriersModel;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use c006\user\models\UserBalance as UserBalanceModel;
 
 /**
- * PhoneCarriers represents the model behind the search form about `c006\user\models\PhoneCarriers`.
+ * UserBalance represents the model behind the search form about `c006\user\models\UserBalance`.
  */
-class PhoneCarriers extends PhoneCarriersModel
+class UserBalance extends UserBalanceModel
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class PhoneCarriers extends PhoneCarriersModel
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['name'], 'safe'],
+            [['id', 'user_id', 'job_id', 'timestamp'], 'integer'],
+            [['hours', 'amount', 'paid'], 'number'],
         ];
     }
 
@@ -28,7 +28,7 @@ class PhoneCarriers extends PhoneCarriersModel
      */
     public function scenarios()
     {
-// bypass scenarios() implementation in the parent class
+        // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
 
@@ -41,7 +41,7 @@ class PhoneCarriers extends PhoneCarriersModel
      */
     public function search($params)
     {
-        $query = PhoneCarriersModel::find();
+        $query = UserBalanceModel::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -50,16 +50,20 @@ class PhoneCarriers extends PhoneCarriersModel
         $this->load($params);
 
         if (!$this->validate()) {
-// uncomment the following line if you do not want to return any records when validation fails
-// $query->where('0=1');
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
             return $dataProvider;
         }
 
         $query->andFilterWhere([
             'id' => $this->id,
+            'user_id' => $this->user_id,
+            'job_id' => $this->job_id,
+            'hours' => $this->hours,
+            'amount' => $this->amount,
+            'paid' => $this->paid,
+            'timestamp' => $this->timestamp,
         ]);
-
-        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

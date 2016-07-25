@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model c006\user\models\UserBilling */
+/* @var $model c006\user\models\UserBalance */
 
-$this->title                   = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'User Billings'), 'url' => ['index']];
+$this->title = $model->id;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'User Balances'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-billing-view">
+<div class="user-balance-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -18,25 +18,23 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
-            'data'  => [
+            'data' => [
                 'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                'method'  => 'post',
+                'method' => 'post',
             ],
         ]) ?>
     </p>
 
     <?= DetailView::widget([
-        'model'      => $model,
+        'model' => $model,
         'attributes' => [
             'id',
-            'network_id',
-            'store_id',
             'user_id',
-            'name',
-            'exp_month',
-            'exp_year',
-            'postal_code',
-            'default',
+            'job_id',
+            'hours',
+            'amount',
+            'paid',
+            'timestamp:datetime',
         ],
     ]) ?>
 

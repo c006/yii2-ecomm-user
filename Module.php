@@ -24,12 +24,12 @@ class Module extends \yii\base\Module
     /**
      * @var bool
      */
-    public $isBackend = false;
+    public $isBackend = FALSE;
 
     /**
      * @var string
      */
-    public $loginPath = 'user/account';
+    public $loginPath = '/account/dashboard';
 
     /**
      *
@@ -61,6 +61,7 @@ class Module extends \yii\base\Module
         if (sizeof(explode('/', $route)) > 1) {
             list($this->defaultRoute, $route) = explode('/', $route);
         }
+
         return parent::createController("{$this->defaultRoute}/{$route}");
     }
 }

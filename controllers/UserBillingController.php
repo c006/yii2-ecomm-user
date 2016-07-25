@@ -19,8 +19,6 @@ class UserBillingController extends Controller
 {
 
 
-
-
     public function behaviors()
     {
         return [
@@ -42,7 +40,7 @@ class UserBillingController extends Controller
         parent::init();
         AssetGridView::register($this->getView());
 
-        $searchModel = new UserBillingSearch();
+        $searchModel  = new UserBillingSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -75,11 +73,11 @@ class UserBillingController extends Controller
         $model = new UserBilling();
 
         if (isset($_POST['UserBilling'])) {
-            $post = $_POST['UserBilling'];
+            $post              = $_POST['UserBilling'];
             $model->attributes = $post;
             $model->network_id = AppHelper::getNetwork();
-            $model->store_id = AppHelper::getStore();
-            $model->user_id = Yii::$app->user->id;
+            $model->store_id   = AppHelper::getStore();
+            $model->user_id    = Yii::$app->user->id;
 
             if ($model->validate() && $model->save()) {
                 Alerts::setAlertType(Alerts::ALERT_SUCCESS);
@@ -93,8 +91,8 @@ class UserBillingController extends Controller
         }
 
         $model->network_id = 0;
-        $model->store_id = 0;
-        $model->user_id = 0;
+        $model->store_id   = 0;
+        $model->user_id    = 0;
 
         return $this->render('create', [
             'model' => $model,
@@ -114,11 +112,11 @@ class UserBillingController extends Controller
         $model = $this->findModel($id);
 
         if (isset($_POST['UserBilling'])) {
-            $post = $_POST['UserBilling'];
+            $post              = $_POST['UserBilling'];
             $model->attributes = $post;
             $model->network_id = AppHelper::getNetwork();
-            $model->store_id = AppHelper::getStore();
-            $model->user_id = Yii::$app->user->id;
+            $model->store_id   = AppHelper::getStore();
+            $model->user_id    = Yii::$app->user->id;
 
             if ($model->validate() && $model->save()) {
                 Alerts::setAlertType(Alerts::ALERT_SUCCESS);
@@ -132,8 +130,8 @@ class UserBillingController extends Controller
         }
 
         $model->network_id = 0;
-        $model->store_id = 0;
-        $model->user_id = 0;
+        $model->store_id   = 0;
+        $model->user_id    = 0;
 
         return $this->render('update', [
             'model' => $model,

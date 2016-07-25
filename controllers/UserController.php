@@ -4,6 +4,7 @@ namespace c006\user\controllers;
 use c006\alerts\Alerts;
 use c006\core\assets\CoreHelper;
 use c006\email\WidgetEmailer;
+use c006\sms\Sms;
 use c006\user\assets\AppHelper;
 use c006\user\models\form\Login;
 use c006\user\models\form\PasswordResetRequest;
@@ -64,7 +65,8 @@ class UserController extends Controller
             'verbs'  => [
                 'class'   => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post'],
+                    /* TODO - Should be POST only */
+                    'logout' => ['post', 'get'],
                 ],
             ],
         ];
@@ -100,15 +102,22 @@ class UserController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
-                    /* ~ c006\email\EmailTemplates */
-                    $array            = [];
-                    $array['subject'] = Yii::$app->params['siteName'] . ' : User Sign Up';
-                    WidgetEmailer::widget(['template_id' => 1, 'array' => $array]);
-//                    /* ~ User "Hello" notification */
-//                    AppHelper::addNotification(6, 'Welcome, ' . $user['first_name'] . ' ' . $user['last_name']);
-//                    Yii::$app->user->logout();
 
-                    return $this->redirect('/user/signup-success');
+                    $array = [];
+                    $array['subject'] = Yii::$app->params['siteName'] . ' : User Sign Up';
+                    $array['main_header'] = 'C006';
+                    $array['sub_header'] = 'Welcome, here is information you will need';
+                    $array['first_name'] = $user->first_name;
+                    $user->password_reset_token = md5(time());
+                    $user->save();
+                    $array['security_key'] = Yii::$app->params['siteUrl'] . '/user/confirm?token=' . $user->password_reset_token;
+
+                    WidgetEmailer::widget(['template_id' => 1, 'array' => $array]);
+
+                    $sms = new Sms();
+                    $sms->send('9492026160', 'Sign Up', $user->first_name . ' ' . $user->last_name . ' .... ' . $user->phone);
+
+                    return $this->redirect('/user/success');
                 }
             }
         }
@@ -118,6 +127,40 @@ class UserController extends Controller
         ]);
     }
 
+    public function actionSuccess()
+    {
+
+        return $this->render('success', []);
+    }
+
+
+    public function actionConfirm($token)
+    {
+        if ($token) {
+            $user = User::find()
+                ->where(['password_reset_token' => $token])
+                ->one();
+            if ($user) {
+                $user->password_reset_token = '';
+                $user->confirmed = 1;
+                $user->status = 10;
+                $user->save();
+
+                Alerts::setMessage("Welcome " . $user->first_name . ", please sign in");
+                Alerts::setAlertType(Alerts::ALERT_SUCCESS);
+                Alerts::setCountdown(5);
+
+
+                return $this->redirect('/user/login');
+            }
+        }
+
+        Alerts::setMessage("No token match was found. Please check the link or contact me.");
+        Alerts::setAlertType(Alerts::ALERT_DANGER);
+        Alerts::setCountdown(5);
+
+        return $this->redirect('/');
+    }
 
     /**
      * @return string|\yii\web\Response
@@ -125,18 +168,38 @@ class UserController extends Controller
     public function actionLogin()
     {
         if (Yii::$app->user->isGuest == FALSE) {
-            return $this->redirect(self::userRedirect());
+            //return $this->redirect(self::userRedirect());
         }
         $model = new Login();
-        $post  = Yii::$app->request->post();
+        $post = Yii::$app->request->post();
         if ($model->load($post)) {
+//            print_r($post); exit;
             if (!$model->login()) {
                 Alerts::setMessage('Login failed, please try again');
                 Alerts::setAlertType(Alerts::ALERT_DANGER);
             } else {
+
+/* Testing email */
+//                $user = AppHelper::getUser(FALSE);
+//
+//
+//                $array = [];
+//                $array['subject'] = Yii::$app->params['siteName'] . ' : User Sign Up';
+//                $array['main_header'] = 'C006';
+//                $array['sub_header'] = 'Welcome, here is information you will need';
+//                $array['first_name'] = $user->first_name;
+//                $user->password_reset_token = md5(time());
+//                //$user->save();
+//                $array['security_key'] = Yii::$app->params['siteUrl'] . '/user/confirm?token=' . $user->password_reset_token;
+//
+//                WidgetEmailer::widget(['template_id' => 1, 'array' => $array]);
+//
+//                die("DONE");
+
                 $content = $this->renderPartial('user-login-message');
                 Alerts::setMessage($content);
                 Alerts::setAlertType(Alerts::ALERT_SUCCESS);
+                Alerts::setCountdown(5);
 
                 return $this->redirect(self::userRedirect());
             }
@@ -163,11 +226,11 @@ class UserController extends Controller
                 ->one();
             if (sizeof($model)) {
                 /** @var  $model \c006\user\models\User */
-                $model             = self::loadModel($model['id']);
-                $model->security   = '';
-                $model->status     = 10;
+                $model = self::loadModel($model['id']);
+                $model->security = '';
+                $model->status = 10;
                 $model->updated_at = CoreHelper::mysqlTimestamp();
-                $model->confirmed  = 1;
+                $model->confirmed = 1;
                 $model->save();
                 /* Auto user login */
                 Yii::$app->getUser()->login($model);
@@ -193,7 +256,7 @@ class UserController extends Controller
     {
         Yii::$app->user->logout();
 
-        return $this->redirect('/');
+        return $this->redirect(Yii::$app->params['frontend']);
     }
 
 
@@ -202,14 +265,19 @@ class UserController extends Controller
      */
     public function actionRequestPasswordReset()
     {
+//        die("actionRequestPasswordReset");
         $model = new PasswordResetRequest();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail()) {
-                Yii::$app->getSession()->setFlash('success', 'Check your email for further instructions.');
 
-                return $this->goHome();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+
+            if ($model->sendEmail()) {
+                Alerts::setMessage('Success: Email sent');
+                Alerts::setAlertType(Alerts::ALERT_SUCCESS);
+                Alerts::setCountdown(5);
             } else {
-                Yii::$app->getSession()->setFlash('error', 'Sorry, we are unable to reset password for email provided.');
+                Alerts::setMessage('Failed: Unable to send email, please try again');
+                Alerts::setAlertType(Alerts::ALERT_WARNING);
+                Alerts::setCountdown(5);
             }
         }
         if (isset($_REQUEST['e'])) {
@@ -237,7 +305,9 @@ class UserController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
             Yii::$app->getSession()->setFlash('success', 'New password was saved.');
 
-            return $this->goHome();
+            Alerts::setMessage('Success: The password has been updated.<div><a href="/user/login">Account Login</a></div>');
+            Alerts::setAlertType(Alerts::ALERT_SUCCESS);
+            Alerts::setCountdown(5);
         }
 
         return $this->render('resetPassword', [
@@ -282,12 +352,12 @@ class UserController extends Controller
             ->where(['id' => Yii::$app->user->id])
             ->one();
         if (isset($_POST['User'])) {
-            $post              = $_POST['User'];
-            $model->email      = $post['email'];
-            $model->username   = $post['email'];
-            $model->phone      = $post['phone'];
+            $post = $_POST['User'];
+            $model->email = $post['email'];
+            $model->username = $post['email'];
+            $model->phone = $post['phone'];
             $model->first_name = $post['first_name'];
-            $model->last_name  = $post['last_name'];
+            $model->last_name = $post['last_name'];
             $model->save();
             Alerts::setMessage('Preferences updated');
             Alerts::setAlertType(Alerts::ALERT_SUCCESS);

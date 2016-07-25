@@ -11,11 +11,11 @@ use yii\widgets\ActiveForm;
 <div class="phone-carriers-search">
 
     <?php $form = ActiveForm::begin([
-    'action' => ['index'],
-    'method' => 'get',
+        'action' => ['index'],
+        'method' => 'get',
     ]); ?>
 
-        <?= $form->field($model, 'id') ?>
+    <?= $form->field($model, 'id') ?>
 
     <?= $form->field($model, 'name') ?>
 

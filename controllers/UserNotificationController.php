@@ -63,12 +63,12 @@ class UserNotificationController extends Controller
         parent::init();
         AssetGridView::register($this->getView());
 
-        $user = AppHelper::getUser();
-        $searchModel = new UserNotificationSearch();
-        $searchModel->user_id = $user['id'];
+        $user                    = AppHelper::getUser();
+        $searchModel             = new UserNotificationSearch();
+        $searchModel->user_id    = $user['id'];
         $searchModel->network_id = $user['network_id'];
-        $searchModel->store_id = $user['store_id'];
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel->store_id   = $user['store_id'];
+        $dataProvider            = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel'  => $searchModel,

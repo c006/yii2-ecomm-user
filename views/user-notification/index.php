@@ -8,7 +8,7 @@ use yii\helpers\Html;
 /* @var $searchModel c006\user\models\search\UserNotification */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Notifications');
+$this->title                   = Yii::t('app', 'Notifications');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'My Account'), 'url' => '/account'];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::button(Yii::t('app', 'Mark All as Read'), ['class' => 'btn btn-success button-all-read']) ?>
+        <?= Html::button(Yii::t('app', 'Mark All as Read'), ['class' => 'btn btn-secondary button-all-read']) ?>
     </p>
 
     <?php $form = ActiveForm::begin(['id' => 'form-notifications']); ?>
@@ -30,17 +30,17 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-//            'network_id',
-//            'store_id',
-//            'user_id',
-        [
-            'attribute'=>'message',
-            'format'=> 'raw',
+            //            'network_id',
+            //            'store_id',
+            //            'user_id',
+            [
+                'attribute' => 'message',
+                'format'    => 'raw',
 
-        ],
+            ],
 
             'timestamp:datetime',
-//             'read',
+            //             'read',
 
             [
                 'label'     => 'Read',
@@ -48,16 +48,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format'    => 'raw',
                 'value'     => function ($model) {
                     return '<div class="align-center">' . (($model->read) ? '<span class="icon icon-okay" ></span>' :
-                        Html::button(Yii::t('app', 'Mark Read'), ['class' => 'btn btn-success button-read']) .
+                        Html::button(Yii::t('app', 'Mark Read'), ['class' => 'btn btn-secondary button-read']) .
                         '<input type="hidden" class="hidden-read" name="Read[' . $model->id . ']" value="0" />') .
                     '</div>';
-                }
+                },
 
             ],
 
             [
                 'class'    => 'yii\grid\ActionColumn',
-                'template' => '<div class="nowrap">{delete}</div>'
+                'template' => '<div class="nowrap">{delete}</div>',
             ],
         ],
     ]); ?>

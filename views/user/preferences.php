@@ -1,19 +1,20 @@
 <?php
-use common\assets\AppHelpers;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /** @var $model c006\user\models\User */
 
-$this->title = Yii::t('app', 'User Preferences');
+$this->title                   = Yii::t('app', 'User Preferences');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'My Account'), 'url' => '/account'];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
+<?php if (FALSE) : ?>
 <p>
-    <?= Html::a(Yii::t('app', 'Shipping Address'), '/account/shipping', ['class' => 'btn btn-success']) ?>
-    <?= Html::a(Yii::t('app', 'Billing Address'), '/account/billing', ['class' => 'btn btn-success']) ?>
+    <?= Html::a(Yii::t('app', 'Shipping Address'), '/account/shipping', ['class' => 'btn btn-secondary']) ?>
+    <?= Html::a(Yii::t('app', 'Billing Address'), '/account/billing', ['class' => 'btn btn-secondary']) ?>
 </p>
+<?php endif; ?>
 
 <div class="">
     <h1 class="title-large"><?= Html::encode($this->title) ?></h1>

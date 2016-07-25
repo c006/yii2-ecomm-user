@@ -18,8 +18,6 @@ use yii\web\Controller;
  */
 class AccountController extends Controller
 {
-
-
     /**
      * @inheritdoc
      */
@@ -80,19 +78,19 @@ class AccountController extends Controller
 
     public function actionTransactions()
     {
-        $searchModel = new UserTransaction();
+        $searchModel  = new UserTransaction();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $model = new Transactions();
-        $items = AppHelper::getTransactions(1000000);
+        $model        = new Transactions();
+        $items        = AppHelper::getTransactions(1000000);
 
         if (isset($_POST['Transactions'])) {
-            $array = [];
-            $post = $_POST['Transactions'];
+            $array            = [];
+            $post             = $_POST['Transactions'];
             $model->date_from = $post['date_from'];
-            $model->date_to = $post['date_to'];
+            $model->date_to   = $post['date_to'];
             if ($model->date_from && $model->date_to) {
                 $date_from = CoreHelper::dateToTime($model->date_from);
-                $date_to = CoreHelper::dateToTime($model->date_to);
+                $date_to   = CoreHelper::dateToTime($model->date_to);
                 foreach ($items as $item) {
                     if ($item['timestamp'] >= $date_from && $item['timestamp'] <= $date_to) {
                         $array[] = $item;
@@ -107,7 +105,7 @@ class AccountController extends Controller
             'model'        => $model,
             'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
-            'items'        => $items
+            'items'        => $items,
         ]);
     }
 

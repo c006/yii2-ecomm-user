@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model c006\user\models\UserShipping */
 
-$this->title = $model->name;
+$this->title                   = $model->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'User Shippings'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -17,18 +17,18 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-        'class' => 'btn btn-danger',
-        'data' => [
-        'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-        'method' => 'post',
-        ],
+            'class' => 'btn btn-danger',
+            'data'  => [
+                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                'method'  => 'post',
+            ],
         ]) ?>
     </p>
 
     <?= DetailView::widget([
-    'model' => $model,
-    'attributes' => [
-                'id',
+        'model'      => $model,
+        'attributes' => [
+            'id',
             'network_id',
             'store_id',
             'user_id',
@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'postal_code_id',
             'country_id',
             'default',
-    ],
+        ],
     ]) ?>
 
 </div>

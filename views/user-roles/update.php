@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model c006\user\models\UserRoles */
 
-$this->title = Yii::t('app', 'Update {modelClass}: ', [
+$this->title                   = Yii::t('app', 'Update {modelClass}: ', [
         'modelClass' => 'User Roles',
     ]) . ' ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'User Roles'), 'url' => ['index']];

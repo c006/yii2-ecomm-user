@@ -20,7 +20,7 @@ class AssetGridView extends AssetBundle
      * @inheritdoc
      */
     public $css = [
-        'css/grid-view.css'
+        'css/grid-view.css',
     ];
 
     /**

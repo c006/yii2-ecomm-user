@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $searchModel c006\user\\models\search\UserRoles */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'User Roles');
+$this->title                   = Yii::t('app', 'User Roles');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-roles-index">
@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a(Yii::t('app', 'Create {modelClass}', [
             'modelClass' => 'User Roles',
-        ]), ['create'], ['class' => 'btn btn-success']) ?>
+        ]), ['create'], ['class' => 'btn btn-secondary']) ?>
     </p>
 
     <?= GridView::widget([

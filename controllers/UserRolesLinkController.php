@@ -44,7 +44,7 @@ class UserRolesLinkController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new UserRolesLinkSearch();
+        $searchModel  = new UserRolesLinkSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

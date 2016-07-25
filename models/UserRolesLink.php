@@ -7,8 +7,8 @@ use Yii;
 /**
  * This is the model class for table "user_roles_link".
  *
- * @property string $user_roles_link_id
- * @property string $user_id
+ * @property string  $user_roles_link_id
+ * @property string  $user_id
  * @property integer $user_roles_id
  */
 class UserRolesLink extends \yii\db\ActiveRecord
@@ -27,7 +27,7 @@ class UserRolesLink extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'user_roles_id'], 'integer']
+            [['user_id', 'user_roles_id'], 'integer'],
         ];
     }
 

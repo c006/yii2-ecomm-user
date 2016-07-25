@@ -8,8 +8,8 @@ use Yii;
  * This is the model class for table "user_transaction_type".
  *
  * @property integer $id
- * @property string $name
- * @property string $css
+ * @property string  $name
+ * @property string  $css
  */
 class UserTransactionType extends \yii\db\ActiveRecord
 {
@@ -39,9 +39,9 @@ class UserTransactionType extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
+            'id'   => Yii::t('app', 'ID'),
             'name' => Yii::t('app', 'Name'),
-            'css' => Yii::t('app', 'Css'),
+            'css'  => Yii::t('app', 'Css'),
         ];
     }
 }

@@ -7,17 +7,17 @@ use Yii;
 /**
  * This is the model class for table "user_billing".
  *
- * @property string $id
+ * @property string  $id
  * @property integer $network_id
  * @property integer $store_id
  * @property integer $user_id
- * @property string $name
+ * @property string  $name
  * @property integer $exp_month
  * @property integer $exp_year
- * @property string $postal_code
+ * @property string  $postal_code
  * @property integer $default
  *
- * @property User $user
+ * @property User    $user
  */
 class UserBilling extends \yii\db\ActiveRecord
 {
@@ -39,7 +39,7 @@ class UserBilling extends \yii\db\ActiveRecord
             [['network_id', 'store_id', 'user_id', 'exp_month', 'exp_year', 'default'], 'integer'],
             [['name'], 'string', 'max' => 100],
             [['postal_code'], 'string', 'max' => 18],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
+            [['user_id'], 'exist', 'skipOnError' => TRUE, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -49,15 +49,15 @@ class UserBilling extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'network_id' => Yii::t('app', 'Network ID'),
-            'store_id' => Yii::t('app', 'Store ID'),
-            'user_id' => Yii::t('app', 'User ID'),
-            'name' => Yii::t('app', 'Name'),
-            'exp_month' => Yii::t('app', 'Exp Month'),
-            'exp_year' => Yii::t('app', 'Exp Year'),
+            'id'          => Yii::t('app', 'ID'),
+            'network_id'  => Yii::t('app', 'Network ID'),
+            'store_id'    => Yii::t('app', 'Store ID'),
+            'user_id'     => Yii::t('app', 'User ID'),
+            'name'        => Yii::t('app', 'Name'),
+            'exp_month'   => Yii::t('app', 'Exp Month'),
+            'exp_year'    => Yii::t('app', 'Exp Year'),
             'postal_code' => Yii::t('app', 'Postal Code'),
-            'default' => Yii::t('app', 'Default'),
+            'default'     => Yii::t('app', 'Default'),
         ];
     }
 

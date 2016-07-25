@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model c006\user\models\UserTransaction */
 
-$this->title = 'Transaction Details';
+$this->title                   = 'Transaction Details';
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Transaction Details'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
 //            'id',
 //            'network_id',
-            'store_id',
+'store_id',
 //            'user_id',
 //            [
 //                'label'     => 'Type',
@@ -34,9 +34,9 @@ $this->params['breadcrumbs'][] = $this->title;
 //                    return '';
 //                }
 //            ],
-            'amount',
-            'transaction_id',
-            'timestamp:datetime',
+'amount',
+'transaction_id',
+'timestamp:datetime',
         ],
     ]) ?>
 
