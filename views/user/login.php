@@ -1,7 +1,7 @@
 <?php
-use c006\activeForm\ActiveForm;
 use c006\user\Module;
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */

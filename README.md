@@ -1,4 +1,4 @@
-Yii2 user
+Yii2 ecomm-user
 ===================
 
 
@@ -7,7 +7,21 @@ Installation
 ------------
 
 
-User `composer.json`
+The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
+
+Either run
+
+```
+php composer.phar require --prefer-source "c006/yii2-ecomm-user" "*"
+```
+
+or add
+
+```
+"c006/yii2-ecomm-user": "*"
+```
+
+to the require section of your `composer.json` file.
 
 
 Composer.json
@@ -17,11 +31,7 @@ Composer.json
     "repositories": [
         {
           "type": "vcs",
-          "url": "https://github.com/c006/yii2-user.git"
-        },
-        {
-          "type": "vcs",
-          "url": "https://github.com/c006/yii2-email-templates.git"
+          "url": "https://github.com/c006/yii2-ecomm-user.git"
         },
       ]
   
@@ -36,59 +46,21 @@ Setup
     'modules'    => [
         'user'            => [
             'class'     => 'c006\user\Module',
-            'loginPath' => '/account/dashboard',
         ],
     ],
 
 
-**config/params.php**
->
-            'siteName'          => 'My Site',
-            'siteUrl'           => 'http://my-site.com',
-            'user_verfiy_email' => TRUE,
-            'user_login_path'   => '/account',
-            
             
 Requires
 -----------
 
 
-` php composer.phar require --prefer-dist "c006/yii2-alerts" "dev-master" `
-
-
-
+` php composer.phar require --prefer-dist "c006/yii2-core" "*" `
 
 
 
 Comments
 ---------
-
-.
-
-.
-
-.
-
-.
-
-.
-
-.
-
-.
- 
-  
-  
-  
-    
-    
-
-
-
-
-
-
-
 
 
 
